@@ -48,3 +48,30 @@ Next, create a new instance of the interpreter object linked to your script's fi
 x = dsinterpreter.DialogueScript('script.ds')
 x.run()
 ```
+------
+___Language Operators___
+
+- Text Operator
+```
+> Dialogue ""
+> JumpTo ""
+```
+- Indicator Operator
+```
+* End
+```
+- JumpPoint Operator
+```
+@ JumpPoint 0
+```
+- Functional Operator
+```
+~ Wait 0
+~ Key "" is ""
+~ Key "" isn't
+```
+- Variable Referencing
+```
+~ Key "greeting" is "Hello"
+> Dialogue #greeting
+```
