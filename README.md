@@ -39,6 +39,7 @@ ___Example 2 - Advanced dialogue___
 ```
 ------
 ___Interpreting your dialogue scripts___
+
 First, start by importing the interpreter module.
 ```
 import dsinterpreter
