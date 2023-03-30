@@ -1,7 +1,7 @@
 import time
 
 class DialogueScript():
-    def __init__(self, filePath, respondant):
+    def __init__(self, filePath, respondant=None):
         self.filePath = filePath
         self.respondant = respondant
         self.memory = {
