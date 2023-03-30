@@ -1,6 +1,6 @@
 # Dialogue Script
 Python interpreter for an NPC dialogue orientated file format.
--
+------
 ___Example 1 - Basic dialogue___
 ```
 -- This is a comment
@@ -14,7 +14,7 @@ ___Example 1 - Basic dialogue___
 > JumpTo Exit "You too!" -- Instead of a number, 'Exit' is used to 
 * End -- Required
 ```
--
+------
 ___Example 2 - Advanced dialogue___
 ```
 @ JumpPoint 1
@@ -37,7 +37,7 @@ ___Example 2 - Advanced dialogue___
 > JumpTo Exit "Done"
 * End
 ```
--
+------
 ___Interpreting your dialogue scripts___
 First, start by importing the interpreter module.
 ```
