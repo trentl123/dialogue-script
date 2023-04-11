@@ -38,6 +38,8 @@ ___Example 2 - Advanced dialogue___
 * End
 ```
 ------
+![alt text](https://github.com/trentl123/dialogue-script/blob/main/dialogue_script.jpg?raw=true)
+------
 ___Interpreting your dialogue scripts___
 
 First, start by importing the interpreter module.
