@@ -38,8 +38,6 @@ ___Example 2 - Advanced dialogue___
 * End
 ```
 ------
-![Example Image](https://github.com/trentl123/dialogue-script/blob/main/dialogue_script.png?raw=true)
-------
 ___Interpreting your dialogue scripts___
 
 First, start by importing the interpreter module.
@@ -78,3 +76,5 @@ ___Language Operators___
 ~ Key "greeting" is "Hello"
 > Dialogue #greeting
 ```
+------
+![Example Image](https://github.com/trentl123/dialogue-script/blob/main/dialogue_script.png?raw=true)
