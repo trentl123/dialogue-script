@@ -38,7 +38,7 @@ ___Example 2 - Advanced dialogue___
 * End
 ```
 ------
-![alt text](https://github.com/trentl123/dialogue-script/blob/main/dialogue_script.jpg?raw=true)
+![Example Image](https://github.com/trentl123/dialogue-script/blob/main/dialogue_script.png?raw=true)
 ------
 ___Interpreting your dialogue scripts___
 
