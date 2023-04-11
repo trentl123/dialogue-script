@@ -1,16 +1,22 @@
 import time
 
+"""
+NOTE: THIS INTERPRETER IS INTENDED TO BE CHANGED AND ALTERED TO SUIT THE NEEDS OF THE USER.
+"""
+
 class DialogueScript():
     def __init__(self, filePath, respondant=None):
-        self.filePath = filePath
-        self.respondant = respondant
+        # The interpreter's memory
+        self.filePath = filePath # Path of the file
+        self.respondant = respondant # Incase you want to embed this in something else (i.e. a game)
         self.memory = {
-            "options-list": [],
-            "keys": {}
+            "options-list": [], # The memory for the list of options the user can choose from
+            "keys": {} # The memory for the interpreter's variables
         }
-        self.contents = []
+        self.contents = [] # All lines in the file
         for eachLine in open(self.filePath).read().splitlines():
             self.contents.append(eachLine)
+            
     def indexForJumpPoint(self, point):
         count = 0
         for eachLine in self.contents:
@@ -18,7 +24,9 @@ class DialogueScript():
                 return count
             count += 1
     def getVariable(self, keyName):
-        return self.memory['keys'][keyName]
+        return self.memory['keys'][keyName]['value']
+    def getVariableType(self, keyName):
+        return self.memory['keys'][keyName]['type']
     def run(self, point=1):
         self.memory['options-list'] = []
         x = self.contents[self.indexForJumpPoint(point):]
@@ -53,16 +61,37 @@ class DialogueScript():
                             return
                         else:
                             return self.run(int(self.memory['options-list'][choice].split(' ', 3)[2]))
+                elif eachLine.split(' ', 2)[1].lower() == 'endat':
+                    if eachLine.split(' ',2)[2].lower() == 'exit':
+                        return
+                    return self.run(int(eachLine.split(' ',2)[2]))
             elif eachLine.startswith('~'):
                 # Functional Operator
                 if eachLine.split(' ')[1].lower() == 'wait':
                     time.sleep(int(eachLine.split(' ')[2]))
                 elif eachLine.split(' ')[1].lower() == 'key':
-                    keyName = eachLine.split(' ')[2][1:][:-1]
+                    keyName = eachLine.split(' ')[2].strip('"')
                     keyValue = eachLine.split(' ',4)[4]
-                    if keyValue[0] == '"' or "'":
-                        keyValue = keyValue[1:][:-1]
+                    keyType = 'str'
+                    # Test if integer
+                    try:
+                        keyValue = int(str(keyValue).strip(' '))
+                        keyType = 'int'
+                    except Exception:
+                        if keyValue[0] == '"' or "'":
+                            keyValue = keyValue[1:][:-1]
                     if eachLine.split(' ',4)[3].lower() == 'is':
-                        self.memory['keys'][keyName] = keyValue
+                        self.memory['keys'][keyName] = {'value': keyValue, 'type': keyType}
                     elif eachLine.split(' ',4)[3].lower() in ['isnt', "isn't"]:
                         del self.memory['keys'][keyName]
+                elif eachLine.split(' ')[1].lower() == 'increase':
+                    components = eachLine.split(' ')
+                    keyName = components[2]
+                    by = components[3]
+                    amount = components[4]
+                    value = self.getVariable(keyName.strip('"'))
+                    if self.getVariableType(keyName.strip('"')) == 'int' and by == 'by':
+                        self.memory['keys'][keyName.strip('"')]['value'] = int(value) + int(amount)
+
+x = DialogueScript('test.ds')
+x.run()
