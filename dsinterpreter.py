@@ -69,6 +69,32 @@ class DialogueScript():
                 # Functional Operator
                 if eachLine.split(' ')[1].lower() == 'wait':
                     time.sleep(int(eachLine.split(' ')[2]))
+                elif eachLine.split(' ')[1].lower() == 'math':
+                    components = eachLine.split(' ')
+                    operation = components[2].lower()
+                    operand1 = components[3].strip()
+                    operand2 = components[4].strip()
+                    result_var = components[5].strip()
+                    try:
+                        operand1 = int(operand1)
+                    except Exception:
+                        operand1 = int(self.getVariable(operand1.replace("#","").replace('"','').replace("'","")))
+                    try:
+                        operand2 = int(operand2)
+                    except Exception:
+                        operand2 = int(self.getVariable(operand2.replace("#","").replace('"','').replace("'","")))
+    
+                    if operation == 'add':
+                        result = operand1 + operand2
+                    elif operation == 'sub':
+                        result = operand1 - operand2
+                    elif operation == 'div':
+                        result = operand1 // operand2
+                    elif operation == 'mlt':
+                        result = operand1 * operand2
+    
+                    if result_var.startswith('#'):
+                        self.memory['keys'][result_var[1:]] = {'value': result, 'type': 'int'}
                 elif eachLine.split(' ')[1].lower() == 'key':
                     keyName = eachLine.split(' ')[2].strip('"')
                     keyValue = eachLine.split(' ',4)[4]
@@ -92,6 +118,3 @@ class DialogueScript():
                     value = self.getVariable(keyName.strip('"'))
                     if self.getVariableType(keyName.strip('"')) == 'int' and by == 'by':
                         self.memory['keys'][keyName.strip('"')]['value'] = int(value) + int(amount)
-
-x = DialogueScript('test.ds')
-x.run()
