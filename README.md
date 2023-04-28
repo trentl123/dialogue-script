@@ -70,6 +70,7 @@ ___Language Operators___
 ~ Wait 0
 ~ Key "" is ""
 ~ Key "" isn't
+~ Math add/sub/div/mlt #FIRST #SECOND #RESULT
 ```
 - Variable Referencing
 ```
